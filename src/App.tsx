@@ -1,7 +1,8 @@
+import ShaderCanvas from "./components/ShaderCanvas"
 
 function App() {
   return (
-    <p>Hi</p>
+    <ShaderCanvas />
   )
 }
 
