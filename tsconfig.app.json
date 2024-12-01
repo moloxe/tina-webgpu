@@ -22,7 +22,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "allowJs": true
+    "allowJs": true,
+    "types": ["@webgpu/types"]
   },
   "include": ["src"]
 }
