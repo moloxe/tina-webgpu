@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
 import { setupPlayer } from "../../lib/stages/shader/main";
 import { mat4 } from "../../external/glMatrix";
 import { shaderCode } from "./shader";
@@ -39,15 +39,15 @@ function addCanvasDraggListener(
 }
 
 function ShaderCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const fpsRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fpsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    const fps = fpsRef.current
+    const canvas = canvasRef.current;
+    const fps = fpsRef.current;
 
     async function setup() {
-      if (!canvas || !fps) return () => { }
+      if (!canvas || !fps) return () => {};
 
       const cameraPosition = [0, 0, 0];
       const cameraRotation = { x: 0, y: 0 };
@@ -71,7 +71,7 @@ function ShaderCanvas() {
         }
       );
 
-      const player = await setupPlayer(canvas, shaderCode)
+      const player = await setupPlayer(canvas, shaderCode);
 
       player.setBeforeRender(() => {
         const imageWidth = canvas.width;
@@ -79,30 +79,32 @@ function ShaderCanvas() {
         const fov = 62;
         const sceneCenter = [-1.5, 0.4, 2.0];
         handleDrag(sceneCenter);
-        player.setParams(new Float32Array([
-          ...sceneViewMatrix,
-          // ---
-          imageWidth,
-          imageHeight,
-          fov,
-          frame,
-          // ---
-          ...sceneCenter,
-          0, // blob
-          // ---
-          0, // spike
-          0.003, // detalle
-          0, // temp1,
-          0, // temp2,
-          // ---
-          ...[0.2, 0.5, 0.1],
-        ]))
-      })
+        player.setParams(
+          new Float32Array([
+            ...sceneViewMatrix,
+            // ---
+            imageWidth,
+            imageHeight,
+            fov,
+            frame,
+            // ---
+            ...sceneCenter,
+            0, // blob
+            // ---
+            0, // spike
+            0.003, // detalle
+            0, // temp1,
+            0, // temp2,
+            // ---
+            ...[0.2, 0.5, 0.1],
+          ])
+        );
+      });
 
       let frame = 0;
       player.setAfterRender(() => {
         frame += 1;
-      })
+      });
 
       let previousFpsFrame = 0;
       const fpsInterval = setInterval(() => {
@@ -110,29 +112,28 @@ function ShaderCanvas() {
         previousFpsFrame = frame;
       }, 1000);
 
-
-      player.play()
+      player.play();
 
       return () => {
-        removeDraggCanvasListeners()
-        player.stop()
-        clearInterval(fpsInterval)
-      }
+        removeDraggCanvasListeners();
+        player.stop();
+        clearInterval(fpsInterval);
+      };
     }
 
-    const unsubscribePromise = setup()
+    const unsubscribePromise = setup();
 
     return () => {
-      unsubscribePromise.then(unsubscribe => unsubscribe())
-    }
-  }, [])
+      unsubscribePromise.then((unsubscribe) => unsubscribe());
+    };
+  }, []);
 
   return (
     <>
       <div ref={fpsRef} />
       <canvas ref={canvasRef} width={800} height={600} />
     </>
-  )
+  );
 }
 
-export default ShaderCanvas
+export default ShaderCanvas;

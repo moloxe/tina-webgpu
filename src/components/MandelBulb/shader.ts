@@ -1,4 +1,4 @@
-export const shaderCode = /* glsl */ `
+export const shaderCode = /* wgsl */ `
 const PI = 3.14159265359;
 const RADIAN = PI / 180.0;
 const BAILOUT = 2.0;
