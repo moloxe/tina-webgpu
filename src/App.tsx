@@ -1,8 +1,8 @@
-import ShaderCanvas from "./components/ShaderCanvas"
+import MandelBulb from "./components/MandelBulb/MandelBulb"
 
 function App() {
   return (
-    <ShaderCanvas />
+    <MandelBulb />
   )
 }
 
