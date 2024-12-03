@@ -2,16 +2,17 @@ import { useRef } from "react";
 import BasicFragment from "../../lib/components/BasicFragment/BasicFragment";
 
 function VectorField() {
-  const mouseX = useRef(0)
+  const mouseX = useRef(0);
   return (
     <BasicFragment
       width={800}
       height={600}
-      onMouseMove={({ clientX }) => mouseX.current = clientX}
+      onMouseMove={({ clientX }) => (mouseX.current = clientX)}
       getUniforms={() => [
-        3 + 3 * mouseX.current / 800 // scale
+        3 + (3 * mouseX.current) / 800, // scale
       ]}
-      fragment={ /* wgsl */ `
+      fragment={
+        /* wgsl */ `
         scale: f32,
         ---
         fn getTarget(origin: vec2f) -> vec2f {
@@ -49,9 +50,10 @@ function VectorField() {
         let color = hsv2rgb(aDist / TWO_PI, 1., log(1. + eDist));
 
         return vec4f(color, 1.);
-      `}
+      `
+      }
     />
-  )
+  );
 }
 
-export default VectorField
+export default VectorField;
