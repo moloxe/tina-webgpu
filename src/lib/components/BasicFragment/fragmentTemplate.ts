@@ -18,7 +18,7 @@ struct Interpolators {
   @builtin(position) pRaster: vec4<f32>,
   @location(0) uv: vec2f,
 };
-`;
+`
 
 const vertexShader = /* wgsl */ `
 @vertex
@@ -35,21 +35,21 @@ fn vs_main(@builtin(vertex_index) vertexIndex: u32) -> Interpolators {
   output.pRaster = vec4<f32>(vertex, 0, 1); // will be converted to raster space automatically
   return output;
 }
-`;
+`
 
 export function fragmentToShader(inputFragment: string) {
-  let finalFragment = inputFragment;
-  let extraUniforms = "";
-  let functions = "";
+  let finalFragment = inputFragment
+  let extraUniforms = ''
+  let functions = ''
 
-  if (finalFragment.includes("---")) {
-    const blocks = finalFragment.split("---");
+  if (finalFragment.includes('---')) {
+    const blocks = finalFragment.split('---')
     if (blocks.length === 2) {
-      [extraUniforms, finalFragment] = blocks;
+      ;[extraUniforms, finalFragment] = blocks
     } else if (blocks.length === 3) {
-      [extraUniforms, functions, finalFragment] = blocks;
+      ;[extraUniforms, functions, finalFragment] = blocks
     } else {
-      throw new Error("Fragment error: Too many blocks.");
+      throw new Error('Fragment error: Too many blocks.')
     }
   }
 
@@ -61,7 +61,7 @@ export function fragmentToShader(inputFragment: string) {
       let uv = input.pRaster.xy / uniforms.resolution;
       ${finalFragment}
     }
-  `;
+  `
 
-  return parsedShader;
+  return parsedShader
 }

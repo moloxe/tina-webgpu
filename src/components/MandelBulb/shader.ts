@@ -182,4 +182,4 @@ fn fs_main(input: Interpolators) -> @location(0) vec4<f32> {
     input.power
   );
 }
-`;
+`

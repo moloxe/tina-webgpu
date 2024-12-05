@@ -1,7 +1,7 @@
-import BasicFragment from "./components/BasicFragment/BasicFragment";
+import BasicFragment from './components/BasicFragment/BasicFragment'
 
 const Tina = {
   Fragment: BasicFragment,
-};
+}
 
-export default Tina;
+export default Tina

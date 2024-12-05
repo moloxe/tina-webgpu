@@ -1,8 +1,8 @@
-import { useRef } from "react";
-import BasicFragment from "../../lib/components/BasicFragment/BasicFragment";
+import { useRef } from 'react'
+import BasicFragment from '../../lib/components/BasicFragment/BasicFragment'
 
 function VectorField() {
-  const mouseX = useRef(0);
+  const mouseX = useRef(0)
   return (
     <BasicFragment
       width={800}
@@ -34,7 +34,6 @@ function VectorField() {
           return c.z * mix(K.xxx, clamp(p - K.xxx, vec3f(0.), vec3f(1.)), c.y);
         }
         ---
-
         let ori = (vec2f(uv.x, 1. - uv.y) * 2. - 1.) * uniforms.scale;
         var tar = getTarget(ori);
 
@@ -53,7 +52,7 @@ function VectorField() {
       `
       }
     />
-  );
+  )
 }
 
-export default VectorField;
+export default VectorField
